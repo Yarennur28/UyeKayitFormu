@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Üye Kayıt Formu</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+            font-size: 16px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"] {
+            width: 300px;
+        }
+        button[type="submit"] {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Üye Kayıt Formu</h2>
+    <form id="kayitFormu">
+        <div>
+            <label for="eposta">E-posta:</label>
+            <input type="email" id="eposta" name="eposta" required>
+        </div>
+        <div>
+            <label for="ad">Ad:</label>
+            <input type="text" id="ad" name="ad" required>
+        </div>
+        <div>
+            <label for="soyad">Soyad:</label>
+            <input type="text" id="soyad" name="soyad" required>
+        </div>
+        <div>
+            <label for="cepTelefonu">Cep Telefonu:</label>
+            <input type="tel" id="cepTelefonu" name="cepTelefonu" required>
+        </div>
+        <div>
+            <label for="sifre">Şifre:</label>
+            <input type="password" id="sifre" name="sifre" required>
+        </div>
+        <div>
+            <label for="sifreTekrar">Şifre Tekrar:</label>
+            <input type="password" id="sifreTekrar" name="sifreTekrar" required>
+        </div>
+        <button type="submit">Kaydet</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#kayitFormu').submit(function(event) {
+                event.preventDefault(); 
+
+            
+                var eposta = $('#eposta').val();
+                var ad = $('#ad').val();
+                var soyad = $('#soyad').val();
+                var cepTelefonu = $('#cepTelefonu').val();
+                var sifre = $('#sifre').val();
+                var sifreTekrar = $('#sifreTekrar').val();
+
+                
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(eposta)) {
+                    alert('Geçerli bir e-posta adresi giriniz.');
+                    return;
+                }
+
+                
+                if (ad.trim() === '' || soyad.trim() === '' || cepTelefonu.trim() === '' || sifre.trim() === '' || sifreTekrar.trim() === '') {
+                    alert('Tüm alanları doldurunuz.');
+                    return;
+                }
+
+                
+                if (sifre !== sifreTekrar) {
+                    alert('Şifreler eşleşmiyor.');
+                    return;
+                }
+
+                
+                var bilgi = 'E-posta: ' + eposta + '\n';
+                bilgi += 'Ad: ' + ad + '\n';
+                bilgi += 'Soyad: ' + soyad + '\n';
+                bilgi += 'Cep Telefonu: ' + cepTelefonu + '\n';
+                alert(bilgi);
+
+                
+                window.location.href = 'sayfa2.html';
+            });
+        });
+    </script>
+</body>
+</html>
+
